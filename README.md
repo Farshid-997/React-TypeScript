@@ -1,4 +1,5 @@
 #Here is a simple project about TS and React
+
 #and basics of Ts are written here.
 
 let name:string|number;

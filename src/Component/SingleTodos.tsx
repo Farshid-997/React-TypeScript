@@ -6,15 +6,39 @@ import  './CSS/style.css'
 type Props={
   todo:Todo,
   todos:Todo[],
- setTodos: React.Dispatch<React.SetStateAction<Todo[]>>
+ setTodos: React.Dispatch<React.SetStateAction<Array<Todo>>>
 }
+
+
 const SingleTodos = ({todo,todos,setTodos}:Props) => {
+
+  const handleDelete=(id:number)=>{
+setTodos(
+  todos.filter((todo)=>todo.id!==id)
+)
+}
+
+const handleDone=(id:number)=>{
+  setTodos(
+    todos.map((todo)=>todo.id===id?{...todo,isDone:!todo.isDone}:todo)
+  )
+  }
   return (
     <div>
       <form className="todos__single">
-        <span  className="todos__single--text">
-{todo.todo}
-        </span>
+
+        {
+          todo.isDone?(
+            <s  className="todos__single--text">
+            {todo.todo}
+                    </s>
+          ):(
+            <span  className="todos__single--text">
+            {todo.todo}
+                    </span>
+          )
+        }
+      
 
         <div>
             <span
@@ -24,10 +48,10 @@ const SingleTodos = ({todo,todos,setTodos}:Props) => {
               <AiFillEdit />
             </span>
             <span className="icon">
-              <AiFillDelete />
+              <AiFillDelete onClick={()=>handleDelete(todo.id)}/>
             </span>
             <span className="icon">
-              <MdDone />
+              <MdDone onClick={()=>handleDone(todo.id)} />
             </span>
           </div>
       </form>

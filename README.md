@@ -2,6 +2,7 @@
 
 #and basics of Ts are written here.
 
+=>>>>>first example :
 let name:string|number;
 
 name=55;
